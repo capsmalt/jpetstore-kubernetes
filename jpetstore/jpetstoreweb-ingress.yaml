@@ -1,0 +1,13 @@
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: jpetstore-ingress
+spec:
+  rules:
+  - host: jpetstore.<CLUSTER DOMAIN>
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: web
+          servicePort: 80

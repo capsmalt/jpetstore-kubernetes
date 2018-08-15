@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: db
+spec:
+  selector:
+    app: jpetstoredb
+  ports:
+  - port: 3306
+    targetPort: 3306
