@@ -25,10 +25,10 @@ JpetstoreをKubernetesにデプロイしてみよう
 
     ```
     # IBM Cloudへのログイン
-    ic login -a https://api.ng.bluemix.net
+    ibmcloud login -a https://api.ng.bluemix.net
 
     # container serviceが利用する地域を設定
-    ic cs region-set us-south
+    ibmcloud cs region-set us-south
 
     # kubernetesの接続情報の取得
     # コマンド実行後に環境変数 KUBECONFIG の設定情報が出力されるためその行をコピペしてください
