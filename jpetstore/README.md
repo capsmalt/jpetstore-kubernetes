@@ -71,7 +71,7 @@ JpetstoreをKubernetesにデプロイしてみよう
     cd jpetstore
 
     # docker build
-    docker build . -t ${MYREGISTRY}/${MYNAMESPACE}/jpetstoreweb
+    docker build . -t ${MYREGISTRY}/${MYNAMESPACE}/jpetstoreweb:latest
 
     # buildしたイメージの確認
     docker run -d -p 9080:9080 ${MYREGISTRY}/${MYNAMESPACE}/jpetstoreweb:latest
@@ -80,7 +80,7 @@ JpetstoreをKubernetesにデプロイしてみよう
     docker images
 
     # imageをIBM CloudのRegistryに登録
-    docker push ${MYREGISTRY}/${MYNAMESPACE}/jpetstoreweb
+    docker push ${MYREGISTRY}/${MYNAMESPACE}/jpetstoreweb:latest
 
     # 登録結果の確認
     ibmcloud cr image-list
@@ -93,13 +93,13 @@ JpetstoreをKubernetesにデプロイしてみよう
     cd db
 
     # docker build
-    docker build . -t ${MYREGISTRY}/${MYNAMESPACE}/jpetstoredb
+    docker build . -t ${MYREGISTRY}/${MYNAMESPACE}/jpetstoredb:latest
 
     # buildされたimageの確認
     docker images
 
     # imageをIBM CloudのRegistryに登録
-    docker push ${MYREGISTRY}/${MYNAMESPACE}/jpetstoredb
+    docker push ${MYREGISTRY}/${MYNAMESPACE}/jpetstoredb:latest
 
     # 登録結果の確認
     ibmcloud cr image-list
@@ -150,8 +150,6 @@ JpetstoreをKubernetesにデプロイしてみよう
 
     ```
     kubectl apply -f jpetstoreweb-nodeport.yaml
-    # worker nodeのIPを確認
-    ibmcloud cs workers mycluster
     ```
 
 ## アプリへアクセス
@@ -166,6 +164,20 @@ JpetstoreをKubernetesにデプロイしてみよう
   
   http://<WORKER NODE PUBLIC IP>:<SVC PORT>  
   ex: http://69.56.28.251:30060
+
+  * WORKER NodeのIPとSVCポートの確認方法
+
+    ```
+    # コマンドを実行しworker nodeのIPを確認
+    # 出力結果のPublicIP項目
+    ibmcloud cs workers mycluster  
+
+    # SVCのポート
+    # コマンドを実行しweb-np のPort項目を確認
+    # 80:30739/TCP のように80:****** と記載されている箇所がPort番号です
+    # 上記例の場合は30060がポート番号です。
+    kubectl get svc
+    ```
 
 
 ## tips

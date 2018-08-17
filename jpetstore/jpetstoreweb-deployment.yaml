@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: jpetstoreweb
-        image: <REGISTRY NAMESPACE>/jpetstoreweb
+        image: <REGISTRY NAMESPACE>/jpetstoreweb:latest
         env:
           - name: VERSION
             value: "1"
